@@ -18,8 +18,111 @@ Performance testing notebook that measures load times for the clinical trials at
 jupyter notebook test_load_times.ipynb
 ```
 
-### 2. `selenium_field_mapper.ipynb` ⭐ NEW
-Comprehensive Selenium-based HTML parser that maps all data fields in the application.
+### 2. `application_crawler.ipynb` 🚀 RECOMMENDED
+**Full Application Crawler** - Automatically discovers and maps the entire application structure.
+
+This is the most comprehensive tool that crawls the entire application to build a complete sitemap and field mapping.
+
+**Features:**
+- **Automatic Page Discovery**: Starts from seed URLs and automatically discovers all pages
+- **Intelligent Crawling**: Follows links from list pages to detail pages
+- **Tab Detection**: Automatically detects and clicks through tabs (Works, Hypotheses, Patents, etc.)
+- **Complete Sitemap**: Builds a tree structure of the entire application
+- **Comprehensive Field Mapping**: Extracts all fields from every page and tab
+- **Relationship Mapping**: Shows how pages are connected (list → detail → tabs)
+- **Multiple Export Formats**: CSV, JSON, and human-readable sitemap
+
+**How it Works:**
+
+1. **Seed URLs** → Start from main sections (e.g., `/clinical-trial/`, `/explore/clinical-trials`)
+2. **Discover Links** → Find all internal links on each page
+3. **Follow to Detail Pages** → Navigate to detail pages (e.g., `/clinical-trial/ASC-CT-...`)
+4. **Detect Tabs** → Find and click tabs (Overview, Works, Hypotheses, Patents)
+5. **Extract Fields** → Map all data fields from each page/tab
+6. **Build Structure** → Create complete sitemap showing relationships
+
+**Example Structure Discovered:**
+
+```
+📄 /clinical-trial/
+   Type: list | Fields: 45 | Links: 127
+
+   📄 /clinical-trial/ASC-CT-0000000174586-1.0-1745776457
+      Type: detail | Fields: 89 | Tabs: Overview, Works, Hypotheses, Patents
+      Tabs: Overview, Works, Hypotheses, Patents
+
+      📄 /work/ASC-WK-...
+         Type: work_detail | Fields: 156
+```
+
+**Configuration:**
+
+```python
+# Seed URLs - starting points
+SEED_URLS = [
+    "https://app.allsci.com/clinical-trial/",
+    "https://app.allsci.com/explore/clinical-trials",
+    # Add more sections as needed
+]
+
+# Crawl limits
+MAX_PAGES_TO_CRAWL = 50  # Total pages to crawl
+MAX_DETAIL_PAGES_PER_LIST = 5  # Detail pages per list page
+MAX_DEPTH = 3  # How deep to crawl
+```
+
+**Output Files:**
+
+1. **`field_mapping_full_YYYYMMDD_HHMMSS.csv`**
+   - All fields from all pages with full metadata
+   - Columns: page_url, page_type, tab_name, category, label, value, selector, has_data
+
+2. **`page_structure_YYYYMMDD_HHMMSS.csv`**
+   - Summary of all crawled pages
+   - Columns: url, page_type, title, depth, num_tabs, tabs, num_fields, num_links
+
+3. **`crawl_results_YYYYMMDD_HHMMSS.json`**
+   - Complete crawl data in JSON format
+   - Includes sitemap and page relationships
+
+4. **`sitemap_YYYYMMDD_HHMMSS.txt`**
+   - Human-readable application structure map
+
+**Usage:**
+
+```bash
+jupyter notebook application_crawler.ipynb
+```
+
+**Example Output:**
+
+```
+CRAWL SUMMARY
+═══════════════════════════════════════
+Total Pages: 47
+Total Fields: 2,341
+
+Pages by Type:
+clinical_trial_detail    25
+clinical_trial_list       1
+work_detail              15
+explore_atlas             1
+patent_detail             5
+
+APPLICATION STRUCTURE MAP
+═══════════════════════════════════════
+📄 /clinical-trial/
+   Type: clinical_trial_list | Fields: 45 | Links: 127
+
+  📄 /clinical-trial/ASC-CT-0000000174586-1.0-1745776457
+     Type: clinical_trial_detail | Fields: 89 | Links: 23
+     Tabs: Overview, Works, Hypotheses, Patents
+```
+
+---
+
+### 3. `selenium_field_mapper.ipynb`
+Single-page field mapper (use `application_crawler.ipynb` for full application mapping).
 
 **Features:**
 - Automatically logs into the application
@@ -117,7 +220,38 @@ explore/clinical-trials    85 fields
 trial/NCT12345678         71 fields
 ```
 
+## Which Tool Should I Use?
+
+| Use Case | Recommended Tool |
+|----------|------------------|
+| **Map entire application structure** | `application_crawler.ipynb` |
+| **Discover all pages and relationships** | `application_crawler.ipynb` |
+| **Find all tabs/sections in detail pages** | `application_crawler.ipynb` |
+| **Build comprehensive sitemap** | `application_crawler.ipynb` |
+| **Map specific known pages only** | `selenium_field_mapper.ipynb` |
+| **Quick field extraction from 1-2 pages** | `selenium_field_mapper.ipynb` |
+| **Performance testing** | `test_load_times.ipynb` |
+
+**TL;DR**: Use `application_crawler.ipynb` for complete application mapping. It does everything the field mapper does, plus automatic discovery.
+
 ## Configuration
+
+### Application Crawler Configuration
+
+```python
+# Crawl limits
+MAX_PAGES_TO_CRAWL = 50  # Increase for full crawl (e.g., 500)
+MAX_DETAIL_PAGES_PER_LIST = 5  # How many examples per list
+MAX_DEPTH = 3  # How many levels deep
+
+# Add more seed URLs to discover more of the application
+SEED_URLS = [
+    "https://app.allsci.com/clinical-trial/",
+    "https://app.allsci.com/works/",
+    "https://app.allsci.com/patents/",
+    "https://app.allsci.com/hypotheses/",
+]
+```
 
 ### Selenium Field Mapper Configuration
 
