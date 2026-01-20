@@ -34,41 +34,69 @@ This is the most comprehensive tool that crawls the entire application to build 
 
 **How it Works:**
 
-1. **Seed URLs** → Start from main sections (e.g., `/clinical-trial/`, `/explore/clinical-trials`)
-2. **Discover Links** → Find all internal links on each page
-3. **Follow to Detail Pages** → Navigate to detail pages (e.g., `/clinical-trial/ASC-CT-...`)
-4. **Detect Tabs** → Find and click tabs (Overview, Works, Hypotheses, Patents)
-5. **Extract Fields** → Map all data fields from each page/tab
-6. **Build Structure** → Create complete sitemap showing relationships
+1. **Search Queries** → Start with search terms (e.g., "covid", "cancer")
+2. **Click Search Tabs** → Navigate through Hypotheses, Articles, Clinical Trials, Grants, Researchers tabs
+3. **Extract Filters** → Map filter fields (Publication Year, Researcher, Source, etc.)
+4. **Sample Results** → Collect sample detail pages from each search tab (5 per tab by default)
+5. **Follow to Details** → Navigate to detail pages (e.g., `/clinical-trial/ASC-CT-...`)
+6. **Detect Detail Tabs** → Find and click tabs on detail pages (Overview, Works, Hypotheses, Patents)
+7. **Extract All Fields** → Map all data fields from every page and tab
+8. **Build Structure** → Create complete sitemap showing relationships
 
 **Example Structure Discovered:**
 
 ```
-📄 /clinical-trial/
-   Type: list | Fields: 45 | Links: 127
+📄 /search?query=covid (Search Results)
+   Type: search_results | Fields: 67 (filters + metrics) | Search Tabs: 5
 
-   📄 /clinical-trial/ASC-CT-0000000174586-1.0-1745776457
-      Type: detail | Fields: 89 | Tabs: Overview, Works, Hypotheses, Patents
-      Tabs: Overview, Works, Hypotheses, Patents
+   Search Tabs Clicked:
+   ├─ Hypotheses (177.9K results)
+   ├─ Articles (1.2M results)
+   ├─ Clinical Trials (20.1K results) → Sampled 5 trials
+   ├─ Grants (11.8K results)
+   └─ Researchers (635 results)
 
-      📄 /work/ASC-WK-...
+   Filters Extracted:
+   ├─ Publication Year (2025, 2024, 2023, 2022, 2021...)
+   ├─ Researcher (viroj wiwanitkit, giuseppe lippi...)
+   └─ Source (PLOS One, Cureus, Scientific Reports...)
+
+   📄 /clinical-trial/ASC-CT-0000000174586-1.0-1745776457 (Detail Page)
+      Type: clinical_trial_detail | Fields: 89 | Tabs: Overview, Works, Hypotheses, Patents
+
+      Detail Page Tabs:
+      ├─ Overview → Metadata fields (Conditions, Intervention, Phase, Enrollment...)
+      ├─ Works → Related works table
+      ├─ Hypotheses → Related hypotheses
+      └─ Patents → Related patents
+
+      📄 /work/ASC-WK-... (Linked Work)
          Type: work_detail | Fields: 156
 ```
 
 **Configuration:**
 
 ```python
-# Seed URLs - starting points
-SEED_URLS = [
-    "https://app.allsci.com/clinical-trial/",
-    "https://app.allsci.com/explore/clinical-trials",
-    # Add more sections as needed
+# Search queries - starting points
+SEARCH_QUERIES = [
+    "covid",        # Discovers: hypotheses, articles, trials, grants, researchers
+    "cancer",       # Different search for broader coverage
+    "diabetes",     # Another search term
+]
+
+# Search result tabs to explore
+SEARCH_RESULT_TABS = [
+    'Hypotheses',
+    'Articles',
+    'Clinical Trials',
+    'Grants',
+    'Researchers',
 ]
 
 # Crawl limits
 MAX_PAGES_TO_CRAWL = 50  # Total pages to crawl
-MAX_DETAIL_PAGES_PER_LIST = 5  # Detail pages per list page
-MAX_DEPTH = 3  # How deep to crawl
+MAX_RESULTS_PER_SEARCH_TAB = 5  # Sample detail pages per search tab
+MAX_DEPTH = 3  # How deep to crawl from detail pages
 ```
 
 **Output Files:**
@@ -97,26 +125,45 @@ jupyter notebook application_crawler.ipynb
 **Example Output:**
 
 ```
+PHASE 1: SEARCH-BASED DISCOVERY
+═══════════════════════════════════════
+
+[Search Query: 'covid']
+  Performing search: 'covid'
+  Extracting search result metrics...
+  Extracting filter fields...
+  Found 5 search result tabs: Hypotheses, Articles, Clinical Trials, Grants, Researchers
+    → Clicking search tab: Clinical Trials (20.1K results)
+      Found 85 detail pages, sampling 5
+  ✓ Search results page: 67 fields, 25 detail pages discovered
+
+PHASE 2: DETAIL PAGE CRAWLING
+═══════════════════════════════════════
+Queue: 25 pages to crawl
+
+[5/50] Depth 1
+  Crawling: /clinical-trial/ASC-CT-0000000174586-1.0-1745776457
+  - Found 4 tabs: Overview, Works, Hypotheses, Patents
+    → Clicking tab: Works
+  ✓ Total fields extracted: 89
+
 CRAWL SUMMARY
 ═══════════════════════════════════════
 Total Pages: 47
 Total Fields: 2,341
 
 Pages by Type:
-clinical_trial_detail    25
-clinical_trial_list       1
-work_detail              15
-explore_atlas             1
-patent_detail             5
+search_results           2
+clinical_trial_detail   25
+work_detail             15
+patent_detail            5
 
-APPLICATION STRUCTURE MAP
-═══════════════════════════════════════
-📄 /clinical-trial/
-   Type: clinical_trial_list | Fields: 45 | Links: 127
-
-  📄 /clinical-trial/ASC-CT-0000000174586-1.0-1745776457
-     Type: clinical_trial_detail | Fields: 89 | Links: 23
-     Tabs: Overview, Works, Hypotheses, Patents
+Fields by Category:
+search_filter          45  ← Publication Year, Researcher, Source filters
+search_result_count    10  ← Tab counts (177.9K, 1.2M, 20.1K, etc.)
+metadata              567  ← Conditions, Phase, Enrollment, etc.
+labeled_field         892
+button_metric          45
 ```
 
 ---
@@ -239,19 +286,31 @@ trial/NCT12345678         71 fields
 ### Application Crawler Configuration
 
 ```python
+# Search queries - the application uses search-based navigation
+SEARCH_QUERIES = [
+    "covid",        # Broad medical topic
+    "cancer",       # Another broad topic
+    "diabetes",     # Chronic disease
+    # Add more search terms to discover different data
+]
+
 # Crawl limits
-MAX_PAGES_TO_CRAWL = 50  # Increase for full crawl (e.g., 500)
-MAX_DETAIL_PAGES_PER_LIST = 5  # How many examples per list
+MAX_PAGES_TO_CRAWL = 50  # Increase for full crawl (e.g., 200)
+MAX_RESULTS_PER_SEARCH_TAB = 5  # Sample size per search tab
 MAX_DEPTH = 3  # How many levels deep
 
-# Add more seed URLs to discover more of the application
-SEED_URLS = [
-    "https://app.allsci.com/clinical-trial/",
-    "https://app.allsci.com/works/",
-    "https://app.allsci.com/patents/",
-    "https://app.allsci.com/hypotheses/",
+# Additional URLs (optional)
+ADDITIONAL_URLS = [
+    "https://app.allsci.com/explore/clinical-trials",  # Atlas view
 ]
 ```
+
+**Key Settings Explained:**
+
+- `SEARCH_QUERIES`: Search terms to start discovery (e.g., "covid" finds 177K hypotheses, 1.2M articles, 20K trials)
+- `MAX_RESULTS_PER_SEARCH_TAB`: How many detail pages to visit from each search tab (prevents crawling millions of records)
+- `MAX_PAGES_TO_CRAWL`: Hard limit on total pages to prevent runaway crawling
+- `MAX_DEPTH`: How many levels to follow from detail pages (detail → related work → etc.)
 
 ### Selenium Field Mapper Configuration
 
