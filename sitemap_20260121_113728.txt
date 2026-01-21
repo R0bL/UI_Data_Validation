@@ -1,0 +1,197 @@
+APPLICATION SITEMAP
+================================================================================
+
+https://app.allsci.com/search?query=covid
+  Type: search_results
+  Fields: 171
+  Tabs: Hypotheses, Articles, Clinical Trials, Grants, Researchers
+
+https://app.allsci.com/search?query=cancer
+  Type: search_results
+  Fields: 168
+  Tabs: Hypotheses, Articles, Clinical Trials, Grants, Researchers
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000008022734-1.0-1717626505
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000003372723-1.0-1717626143
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000006482345-1.0-1717626364
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000012798535-1.0-1747034775
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000010173196-1.0-1717626657
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000008357168-1.0-1717626543
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000008751210-1.0-1717626562
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000003303887-1.0-1717626136
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000009704790-1.0-1717626628
+    Type: hypothesis_detail
+    Fields: 2
+
+  https://app.allsci.com/hypothesis/ASC-HY-0000006197251-1.0-1717626344
+    Type: hypothesis_detail
+    Fields: 2
+
+https://app.allsci.com/explore/clinical-trials
+  Type: explore_atlas
+  Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000008022734-1.0-1717626505/semantic-similarity
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000008022734-1.0-1717626505/evidence
+      Type: hypothesis_detail
+      Fields: 9
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000003372723-1.0-1717626143/peer-reviews
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000003372723-1.0-1717626143/source
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000006482345-1.0-1717626364/semantic-similarity
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000006482345-1.0-1717626364/evidence
+      Type: hypothesis_detail
+      Fields: 13
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000012798535-1.0-1747034775/source
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000012798535-1.0-1747034775/contributors
+      Type: hypothesis_detail
+      Fields: 32
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000010173196-1.0-1717626657/semantic-similarity
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000010173196-1.0-1717626657/source
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000008357168-1.0-1717626543/evidence
+      Type: hypothesis_detail
+      Fields: 10
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000008357168-1.0-1717626543/contributors
+      Type: hypothesis_detail
+      Fields: 18
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000008751210-1.0-1717626562/source
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000008751210-1.0-1717626562/peer-reviews
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000003303887-1.0-1717626136/contributors
+      Type: hypothesis_detail
+      Fields: 12
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000003303887-1.0-1717626136/source
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000009704790-1.0-1717626628/contributors
+      Type: hypothesis_detail
+      Fields: 9
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000009704790-1.0-1717626628/source
+      Type: hypothesis_detail
+      Fields: 0
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000006197251-1.0-1717626344/contributors
+      Type: hypothesis_detail
+      Fields: 24
+
+    https://app.allsci.com/hypothesis/ASC-HY-0000006197251-1.0-1717626344/evidence
+      Type: hypothesis_detail
+      Fields: 10
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000003928223-1.0-1717626179
+        Type: hypothesis_detail
+        Fields: 2
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000003372723-1.0-1717626143/evidence
+        Type: hypothesis_detail
+        Fields: 10
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000003372723-1.0-1717626143/contributors
+        Type: hypothesis_detail
+        Fields: 12
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000004773209-1.0-1717626242
+        Type: hypothesis_detail
+        Fields: 2
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000012798535-1.0-1747034775/semantic-similarity
+        Type: hypothesis_detail
+        Fields: 0
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000012798535-1.0-1747034775/peer-reviews
+        Type: hypothesis_detail
+        Fields: 0
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000006048989-1.0-1717626337
+        Type: hypothesis_detail
+        Fields: 2
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000007057289-1.0-1717626406
+        Type: hypothesis_detail
+        Fields: 2
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000010173196-1.0-1717626657/contributors
+        Type: hypothesis_detail
+        Fields: 15
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000008751210-1.0-1717626562/semantic-similarity
+        Type: hypothesis_detail
+        Fields: 0
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000008751210-1.0-1717626562/contributors
+        Type: hypothesis_detail
+        Fields: 18
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000003303887-1.0-1717626136/related
+        Type: hypothesis_detail
+        Fields: 5
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000003303887-1.0-1717626136/peer-reviews
+        Type: hypothesis_detail
+        Fields: 0
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000009704790-1.0-1717626628/evidence
+        Type: hypothesis_detail
+        Fields: 12
+
+      https://app.allsci.com/hypothesis/ASC-HY-0000009704790-1.0-1717626628/related
+        Type: hypothesis_detail
+        Fields: 6
+
